@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Camila Jaramillo — Una visión que te pertenece</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #F0E0C0;
+    --gold-pale: #FBF5EC;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E42;
+    --navy-soft: #2C4158;
+    --white: #FDFAF6;
+    --muted: #7A8FA6;
+    --text: #1A1A2E;
+    --accent-green: #2D6A4F;
+    --accent-green-light: #E8F5EE;
+    --danger-soft: #FEF0ED;
+    --danger: #C0392B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1A2E42 0%, var(--navy) 70%);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.12);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.08);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(253,250,246,0.65);
+    max-width: 540px;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,169,110,0.12);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    font-size: 13px;
+    color: var(--gold-light);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  /* ─── SCROLL INDICATOR ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+  }
+  .scroll-hint span { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,169,110,0.2);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-body {
+    font-size: 1rem;
+    color: rgba(253,250,246,0.75);
+    font-weight: 300;
+    max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* ─── OBSERVATION SECTION ─── */
+  .observation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .obs-card {
+    background: var(--navy-mid);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.3s;
+  }
+  .obs-card:hover { background: #1E3045; }
+
+  .obs-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .obs-label {
+    font-size: 13px;
+    color: rgba(253,250,246,0.5);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+
+  .obs-desc {
+    font-size: 14px;
+    color: rgba(253,250,246,0.85);
+    margin-top: 0.75rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ─── GAP = OPPORTUNITY ─── */
+  .gap-section { position: relative; }
+
+  .gap-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  .gap-divider-line { flex: 1; height: 1px; background: rgba(201,169,110,0.15); }
+  .gap-divider-text {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .gap-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .gap-box {
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .gap-now {
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.2);
+    color: rgba(253,250,246,0.8);
+  }
+  .gap-now .gap-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #E74C3C;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .gap-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    padding-top: 1.5rem;
+  }
+
+  .gap-future {
+    background: rgba(45,106,79,0.12);
+    border: 1px solid rgba(45,106,79,0.25);
+    color: rgba(253,250,246,0.8);
+  }
+  .gap-future .gap-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #52C67A;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── VALUE LADDER ─── */
+  .ladder-wrap {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ladder-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.25rem;
+    position: relative;
+  }
+
+  .ladder-step:not(:last-child) .ladder-line {
+    position: absolute;
+    left: 30px;
+    top: 52px;
+    bottom: -16px;
+    width: 1px;
+    background: rgba(201,169,110,0.2);
+  }
+
+  .ladder-node {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .ladder-node.free { background: rgba(82,198,122,0.15); border: 1px solid rgba(82,198,122,0.3); color: #52C67A; }
+  .ladder-node.entry { background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); color: var(--gold); }
+  .ladder-node.mid { background: rgba(52,152,219,0.15); border: 1px solid rgba(52,152,219,0.3); color: #5DADE2; }
+  .ladder-node.high { background: rgba(155,89,182,0.15); border: 1px solid rgba(155,89,182,0.3); color: #A569BD; }
+  .ladder-node.vip { background: rgba(201,169,110,0.2); border: 2px solid var(--gold); color: var(--gold); }
+
+  .ladder-content {
+    padding: 0.25rem 0 1.75rem;
+  }
+
+  .ladder-tier {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .ladder-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .ladder-desc {
+    font-size: 13px;
+    color: rgba(253,250,246,0.6);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .ladder-tag {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 11px;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.2);
+    color: var(--gold-light);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .ladder-tag.new {
+    background: rgba(82,198,122,0.1);
+    border-color: rgba(82,198,122,0.25);
+    color: #52C67A;
+  }
+
+  /* ─── MODEL SECTION ─── */
+  .model-section {
+    background: rgba(201,169,110,0.04);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.08);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .model-item {
+    background: var(--navy);
+    padding: 1.5rem 1.25rem;
+  }
+
+  .model-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(201,169,110,0.12);
+    border: 1px solid rgba(201,169,110,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 0.85rem;
+  }
+
+  .model-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .model-item-desc {
+    font-size: 12px;
+    color: rgba(253,250,246,0.5);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ─── ZERO RISK ─── */
+  .zero-risk-box {
+    margin-top: 2.5rem;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    background: rgba(201,169,110,0.04);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .zero-risk-box::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .zero-risk-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+
+  .zero-risk-sub {
+    font-size: 1rem;
+    color: rgba(253,250,246,0.7);
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  .zero-risk-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    position: relative;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(253,250,246,0.05);
+    border: 1px solid rgba(253,250,246,0.1);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 13px;
+    color: rgba(253,250,246,0.8);
+  }
+  .pill-check { color: #52C67A; font-size: 13px; }
+
+  /* ─── CLOSING / CTA ─── */
+  .closing {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.05));
+  }
+
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 680px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.4;
+  }
+
+  .closing-name {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 0.9rem 2.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .cta-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .cta-note {
+    margin-top: 1rem;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ─── DIVIDER ─── */
+  .full-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(201,169,110,0.08);
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse-line {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.15); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(122,143,166,0.4);
+    border-top: 1px solid rgba(201,169,110,0.06);
+  }
+
+  @media (max-width: 580px) {
+    .gap-row { grid-template-columns: 1fr; }
+    .gap-arrow { transform: rotate(90deg); padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<div class="hero">
+  <p class="eyebrow">Para Camila Jaramillo · Uso personal</p>
+  <h1 class="hero-title">
+    Tu mensaje ya está<br>
+    <em>cambiando vidas.</em><br>
+    Ahora construyamos<br>
+    el negocio que merece.
+  </h1>
+  <p class="hero-sub">
+    Esto no es una propuesta de ventas. Es el análisis de alguien que te ha seguido, que entiende tu misión, y que cree profundamente que tienes algo extraordinario que aún no has escalado del todo.
+  </p>
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Preparado exclusivamente para ti · BE AI
+  </div>
+  <div class="scroll-hint">
+    <span>continúa</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     LO QUE VI
+════════════════════════════════════════════ -->
+<section class="reveal">
+  <p class="section-label">Lo que observé en tu perfil</p>
+  <h2 class="section-title">Camila, lo que tienes<br>es <em>extraordinario.</em></h2>
+  <p class="section-body">
+    Antes de hablar de cualquier cosa, necesitaba ver los números, leer tu contenido, entender tu audiencia. Esto es lo que encontré — y no es poco.
+  </p>
+
+  <div class="observation-grid">
+    <div class="obs-card">
+      <div class="obs-number">3.3M</div>
+      <div class="obs-label">views en un solo reel</div>
+      <div class="obs-desc">Un reel sobre infidelidad emocional que se volvió viral porque tocó algo real y profundo en tu audiencia.</div>
+    </div>
+    <div class="obs-card">
+      <div class="obs-number">32K</div>
+      <div class="obs-label">likes en tu post más potente</div>
+      <div class="obs-desc">"Así NO se ve una relación de Dios" — 32,400 likes con 41K seguidores. Eso es un engagement rate que la mayoría de coaches nunca verá.</div>
+    </div>
+    <div class="obs-card">
+      <div class="obs-number">1,800</div>
+      <div class="obs-label">comentarios de debate real</div>
+      <div class="obs-desc">No comentarios vacíos. Mujeres compartiendo traumas, hombres respondiendo, discusiones vivas. Una comunidad que siente y confía en ti.</div>
+    </div>
+    <div class="obs-card">
+      <div class="obs-number">50:1</div>
+      <div class="obs-label">ratio seguidores / seguidos</div>
+      <div class="obs-desc">Tienes autoridad real. No compraste seguidores ni inflaste el número. Eso se nota, y tiene un valor que no se puede fabricar.</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider reveal"></div>
+
+<!-- ════════════════════════════════════════════
+     GAP ANALYSIS
+════════════════════════════════════════════ -->
+<section class="reveal gap-section">
+  <p class="section-label">El cuello de botella</p>
+  <h2 class="section-title">Tienes el alcance.<br>Falta la <em>estructura detrás.</em></h2>
+  <p class="section-body">
+    No te digo esto para señalar lo que falta — sino porque creo que estás a un paso de dar un salto que la mayoría de coaches tarda años en dar. Aquí está lo que veo con honestidad.
+  </p>
+
+  <div class="gap-divider">
+    <div class="gap-divider-line"></div>
+    <span class="gap-divider-text">Hoy vs. Lo posible</span>
+    <div class="gap-divider-line"></div>
+  </div>
+
+  <div class="gap-row">
+    <div class="gap-box gap-now">
+      <span class="gap-tag">Hoy</span>
+      Todo tu funnel vive dentro de Instagram y WhatsApp. Si Meta cambia sus reglas mañana, tu negocio siente el golpe directamente.
+    </div>
+    <div class="gap-arrow">→</div>
+    <div class="gap-box gap-future">
+      <span class="gap-tag">Lo posible</span>
+      Un ecosistema digital independiente: lista de email propia, curso grabado, comunidad paga. Activos que te pertenecen a ti, no a Meta.
+    </div>
+  </div>
+
+  <div class="gap-row">
+    <div class="gap-box gap-now">
+      <span class="gap-tag">Hoy</span>
+      Tu escalera salta de "guía gratis" a programa de alto ticket. Hay un segmento enorme de tu audiencia que quiere comprarte pero aún no está lista para el salto grande.
+    </div>
+    <div class="gap-arrow">→</div>
+    <div class="gap-box gap-future">
+      <span class="gap-tag">Lo posible</span>
+      Un producto de entrada digital ($47–$197) que filtra, educa y prepara a tus seguidoras para el programa "Virtuosa". Convierte los 3M de views en compradores reales.
+    </div>
+  </div>
+
+  <div class="gap-row">
+    <div class="gap-box gap-now">
+      <span class="gap-tag">Hoy</span>
+      Tu tiempo está directamente atado a tu ingreso. Llamadas, seguimiento manual, respuestas uno a uno. No se puede crecer sin que crezca también tu carga.
+    </div>
+    <div class="gap-arrow">→</div>
+    <div class="gap-box gap-future">
+      <span class="gap-tag">Lo posible</span>
+      Automatización inteligente que atiende, califica y nutre a tus leads 24/7 — mientras tú te enfocas en crear y acompañar a quienes más lo necesitan.
+    </div>
+  </div>
+
+  <div class="gap-row">
+    <div class="gap-box gap-now">
+      <span class="gap-tag">Hoy</span>
+      YouTube está referenciado en tu bio pero subexplotado. Tienes el carisma y el mensaje para dominar ese formato también.
+    </div>
+    <div class="gap-arrow">→</div>
+    <div class="gap-box gap-future">
+      <span class="gap-tag">Lo posible</span>
+      Una estrategia de contenido largo que refuerza tu autoridad, genera tráfico SEO pasivo y alimenta tu funnel de forma permanente, sin depender solo de reels.
+    </div>
+  </div>
+</section>
+
+<div class="full-divider reveal"></div>
+
+<!-- ════════════════════════════════════════════
+     ESCALERA DE VALOR
+════════════════════════════════════════════ -->
+<section class="reveal">
+  <p class="section-label">La escalera que puede existir</p>
+  <h2 class="section-title">De 3 millones de views<br>a <em>ingresos recurrentes.</em></h2>
+  <p class="section-body">
+    Tu audiencia ya está lista. Solo falta la estructura que los acompañe en cada nivel — desde quien acaba de descubrirte hasta quien te quiere cerca por meses.
+  </p>
+
+  <div class="ladder-wrap">
+
+    <div class="ladder-step reveal">
+      <div class="ladder-line"></div>
+      <div class="ladder-node free">1</div>
+      <div class="ladder-content">
+        <div class="ladder-tier">Nivel gratuito · Atracción</div>
+        <div class="ladder-title">Reels virales + Guía por DM + WhatsApp</div>
+        <div class="ladder-desc">Ya lo tienes y funciona brillantemente. Miles de mujeres entran cada semana por tu contenido. Este es tu motor de tráfico más poderoso.</div>
+        <span class="ladder-tag">✓ Activo y funcionando</span>
+      </div>
+    </div>
+
+    <div class="ladder-step reveal">
+      <div class="ladder-line"></div>
+      <div class="ladder-node entry">2</div>
+      <div class="ladder-content">
+        <div class="ladder-tier">Nivel de entrada · Confianza</div>
+        <div class="ladder-title">Curso digital o taller grabado ($47–$197)</div>
+        <div class="ladder-desc">El escalón que hoy no existe. Un producto accesible para la mujer que te sigue desde hace meses pero aún no está lista para "Virtuosa". Aquí conviertes viewers en compradoras.</div>
+        <span class="ladder-tag new">+ Por construir — aquí está la oportunidad mayor</span>
+      </div>
+    </div>
+
+    <div class="ladder-step reveal">
+      <div class="ladder-line"></div>
+      <div class="ladder-node mid">3</div>
+      <div class="ladder-content">
+        <div class="ladder-tier">Nivel medio · Comunidad</div>
+        <div class="ladder-title">Membresía o comunidad paga ($37–$97/mes)</div>
+        <div class="ladder-desc">Ingreso mensual predecible. Mujeres que quieren acompañamiento continuo sin el compromiso de mentoría 1:1. MRR real que no depende de nuevas ventas cada mes.</div>
+        <span class="ladder-tag new">+ Por construir — transforma seguidoras en comunidad</span>
+      </div>
+    </div>
+
+    <div class="ladder-step reveal">
+      <div class="ladder-line"></div>
+      <div class="ladder-node high">4</div>
+      <div class="ladder-content">
+        <div class="ladder-tier">Nivel alto · Transformación</div>
+        <div class="ladder-title">Programa "Virtuosa ✨" (grupal / presencial)</div>
+        <div class="ladder-desc">Tu oferta principal ya existe. Pero imagina lo que sucede cuando está respaldada por una escalera completa debajo de ella. Más leads calificados, menos fricción en el cierre.</div>
+        <span class="ladder-tag">✓ Ya existe · optimizable</span>
+      </div>
+    </div>
+
+    <div class="ladder-step reveal">
+      <div class="ladder-node vip">5</div>
+      <div class="ladder-content">
+        <div class="ladder-tier">Nivel premium · Transformación profunda</div>
+        <div class="ladder-title">Mentoría 1:1 personalizada</div>
+        <div class="ladder-desc">Para quien quiere tu presencia completa. El nivel más alto, el más rentable por hora, y el que se vende solo cuando los niveles anteriores nutren y preparan a la persona correcta.</div>
+        <span class="ladder-tag">✓ Ya existe · magnifica con los escalones anteriores</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider reveal"></div>
+
+<!-- ════════════════════════════════════════════
+     MODEL / PHANTOM
+════════════════════════════════════════════ -->
+<section class="model-section reveal" style="padding: 5rem 0;">
+  <div style="max-width: 880px; margin: 0 auto; padding: 0 2rem;">
+    <p class="section-label">Cómo puedo ayudarte</p>
+    <h2 class="section-title">No soy un proveedor.<br>Soy un <em>socio estratégico.</em></h2>
+    <p class="section-body">
+      Mi modelo no es el de una agencia que te cobra un retainer y desaparece. Trabajo contigo como socio de crecimiento: construyo el sistema, tú lo usas, y solo cuando tú ganas, yo gano. Sin riesgo para ti.
+    </p>
+
+    <div class="model-grid">
+      <div class="model-item">
+        <div class="model-icon">🎯</div>
+        <div class="model-item-title">Estrategia de lanzamiento</div>
+        <div class="model-item-desc">Diseño el embudo completo: desde el producto de entrada hasta el programa premium. Basado en tu audiencia real y tu contenido que ya funciona.</div>
+      </div>
+      <div class="model-item">
+        <div class="model-icon">⚙️</div>
+        <div class="model-item-title">Automatización inteligente</div>
+        <div class="model-item-desc">Sistemas de IA que atienden, cualifican y nutren leads automáticamente. Tú apareces cuando importa, no para tareas repetitivas.</div>
+      </div>
+      <div class="model-item">
+        <div class="model-icon">📈</div>
+        <div class="model-item-title">MRR predecible</div>
+        <div class="model-item-desc">Construimos juntos la estructura de ingresos recurrentes. Membresía o comunidad paga que genera ingreso mensual sin depender de nuevas ventas cada semana.</div>
+      </div>
+      <div class="model-item">
+        <div class="model-icon">🔗</div>
+        <div class="model-item-title">Ecosistema independiente</div>
+        <div class="model-item-desc">Lista de email, página de ventas, integración de pagos. Activos digitales que te pertenecen a ti — no a Meta, no a Instagram.</div>
+      </div>
+      <div class="model-item">
+        <div class="model-icon">💬</div>
+        <div class="model-item-title">Comunidad Skool o similar</div>
+        <div class="model-item-desc">Un espacio propio donde tu comunidad vive, se apoya y permanece. El lugar donde tu mensaje impacta todos los días, sin algoritmos que lo limiten.</div>
+      </div>
+      <div class="model-item">
+        <div class="model-icon">📊</div>
+        <div class="model-item-title">Seguimiento y optimización</div>
+        <div class="model-item-desc">No construyo y me voy. Acompaño el lanzamiento, mido, itero. El sistema mejora cada semana hasta que funcione solo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider reveal"></div>
+
+<!-- ════════════════════════════════════════════
+     ZERO RISK
+════════════════════════════════════════════ -->
+<section class="reveal">
+  <p class="section-label">El acuerdo</p>
+
+  <div class="zero-risk-box">
+    <div class="zero-risk-headline">Si tú no ganas,<br>yo no cobro.</div>
+    <p class="zero-risk-sub">
+      Mi modelo es simple: trabajo a porcentaje de los resultados que generamos juntos. No hay honorarios fijos, no hay facturas mensuales, no hay riesgo para ti. Mi incentivo es exactamente el mismo que el tuyo — que esto funcione.
+    </p>
+    <div class="zero-risk-pills">
+      <span class="pill"><span class="pill-check">✓</span> Sin pago por adelantado</span>
+      <span class="pill"><span class="pill-check">✓</span> Sin retainer mensual</span>
+      <span class="pill"><span class="pill-check">✓</span> Solo gano si tú ganas</span>
+      <span class="pill"><span class="pill-check">✓</span> Cero riesgo financiero para ti</span>
+      <span class="pill"><span class="pill-check">✓</span> Alineados al 100% en los mismos objetivos</span>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider reveal"></div>
+
+<!-- ════════════════════════════════════════════
+     CLOSING
+════════════════════════════════════════════ -->
+<div class="closing reveal">
+  <blockquote class="closing-quote">
+    "Tu mensaje ya está liberando a mujeres de relaciones que las agotan. Imagina lo que pasa cuando la infraestructura detrás de ese mensaje es tan poderosa como el mensaje mismo."
+  </blockquote>
+  <p class="closing-name">— Alex Mike · BE AI</p>
+
+  <a href="https://wa.link/bywk8p" class="cta-btn">Hablemos 5 minutos</a>
+  <p class="cta-note">Sin compromiso. Solo una conversación.</p>
+</div>
+
+<footer>
+  BE AI · Preparado exclusivamente para Camila Jaramillo · Confidencial
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
